@@ -22,18 +22,18 @@ void CountSort(vector<int> a)
 	};
 
 	vector<Number> list;
-	
+
 	for (int i = 0; i < a.size(); i++)
 	{
 		Number index(i);
 		list.push_back(index);
 	}
-	
+
 	for (auto number : a)
 	{
 		int number_count = count(a.begin(), a.end(), number);
 
-		for (auto& obj : list)
+		for (auto &obj : list)
 		{
 			if (obj.num == number)
 			{

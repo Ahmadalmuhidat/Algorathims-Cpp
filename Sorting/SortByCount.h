@@ -1,9 +1,7 @@
-#ifndef _Task_2_1
-#define _Task_2_1
+#ifndef _Sort_Count
+#define _Sort_Count
 #include <vector>
-using namespace std;
-// Сортировка подсчетом
 
-void CountSort(vector<int> a);
+void CountSort(std::vector<int> a);
 
 #endif 

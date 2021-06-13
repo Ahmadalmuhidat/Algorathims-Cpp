@@ -1,7 +1,6 @@
-#ifndef _Task_3_4
-#define _Task_3_4
+#ifndef _Merge_Sort
+#define _Merge_Sort
 #include <iostream>
-// Сортировка слиянием без рекурсии
 
 void MergeSort(int arr[], int l, int r);
 
