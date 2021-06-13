@@ -1,11 +1,10 @@
 #include <iostream>
-#include "SingleLinkedOrderedList.h"
-using namespace std;
+#include "SingleLinkedOrderedList.h"std::
 
 int main()
 {
 	SingleLinkedList A;
-	cout << "list A created " << endl;
+	std::cout << "list A created " << std::endl;
 	A.InsertItem(1);
 	A.InsertItem(4);
 	A.InsertItem(3);
@@ -13,7 +12,7 @@ int main()
 	A.InsertItem(12);
 	A.InsertItem(5);
 	A.InsertItem(8);
-	cout << "list A : ";
+	std::cout << "list A : ";
 	A.ShowList();
 	A.DeleteItem(2);
 	A.ShowList();
@@ -21,7 +20,7 @@ int main()
 	A.ShowList();
 
 	SingleLinkedList B;
-	cout << "list B created " << endl;
+	std::cout << "list B created " << std::endl;
 	B.InsertItem(3);
 	B.InsertItem(12);
 	B.InsertItem(2);
@@ -32,30 +31,30 @@ int main()
 	B.InsertItem(22);
 	B.InsertItem(9);
 	B.InsertItem(13);
-	cout << "list B : ";
+	std::cout << "list B : ";
 	B.ShowList();
-	cout << "=====================" << endl;
-	cout << endl;
+	std::cout << "=====================" << std::endl;
+	std::cout << std::endl;
 
 	SingleLinkedList C;
-	cout << "list C created " << endl;
-	cout << "Common items between A and B :" << endl;
+	std::cout << "list C created " << std::endl;
+	std::cout << "Common items between A and B :" << std::endl;
 	;
 	C = CommonItems(&A, &B);
 	C.ShowList();
-	cout << endl;
+	std::cout << std::endl;
 
-	cout << "move item from A to B :" << endl;
+	std::cout << "move item from A to B :" << std::endl;
 	MoveItem(8, A, B);
-	cout << endl;
+	std::cout << std::endl;
 
 	SingleLinkedList D;
-	cout << "merged list" << endl;
+	std::cout << "merged list" << std::endl;
 	D = MergeLists(&A, &B);
 	D.ShowList();
-	cout << endl;
+	std::cout << std::endl;
 
-	cout << "delete commnon" << endl;
+	std::cout << "delete commnon" << std::endl;
 	DeleteCommon(A, B);
 	B.ShowList();
 
