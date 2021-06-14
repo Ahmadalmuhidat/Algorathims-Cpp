@@ -12,14 +12,13 @@ struct Node
 {
 	int prefix_count;
 	bool isWord;
-	Node* children[26];
+	Node *children[26];
 };
 
 class Dictionary
 {
 public:
-
-    Node* head;
+	Node *head;
 
 	Dictionary();
 
@@ -28,16 +27,13 @@ public:
 	bool search(string word);
 
 	int words_with_prefix(string prefix);
-
-	
-
 };
 
 // Returns new trie node (initialized to NULLs)
-Node* getNode();
+Node *getNode();
 
-bool isEmpty(Node* root);
+bool isEmpty(Node *root);
 
-Node* Remove(Node* root, string key, int depth = 0);
+Node *Remove(Node *root, string key, int depth = 0);
 
 #endif

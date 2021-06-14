@@ -1,5 +1,5 @@
-#ifndef _Sort_Count
-#define _Sort_Count
+#ifndef _SORT_COUNT
+#define _SORT_COUNT
 #include <vector>
 
 void CountSort(std::vector<int> a);

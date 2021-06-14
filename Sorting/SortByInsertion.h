@@ -1,5 +1,5 @@
-#ifndef _Sort_By_Insertion
-#define _Sort_By_Insertion
+#ifndef _SORT_BY_INSERTION
+#define _SORT_BY_INSERTION
 
 int binarySearch(int a[], int item, int low, int high);
 

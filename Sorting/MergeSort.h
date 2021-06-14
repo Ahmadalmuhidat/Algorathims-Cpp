@@ -1,5 +1,5 @@
-#ifndef _Merge_Sort
-#define _Merge_Sort
+#ifndef _MERGE_SORT
+#define _MERGE_SORT
 #include <iostream>
 
 void MergeSort(int arr[], int l, int r);
