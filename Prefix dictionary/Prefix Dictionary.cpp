@@ -21,7 +21,7 @@ void Dictionary::insert(string word)
 
 	for (int i = 0; i < word.length(); ++i)
 	{
-		int letter = word[i] - 'a'; //extrct first character of word
+		int letter = word[i] - 'a'; //extract first character of word
 
 		if (current->children[letter] == NULL)
 		{

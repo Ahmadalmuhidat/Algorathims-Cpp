@@ -8,4 +8,4 @@ void Merge(int arr[], int l, int m, int r);
 
 void printArray(int A[], int size);
 
-#endif 
+#endif

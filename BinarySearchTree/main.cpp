@@ -1,10 +1,10 @@
 #include <iostream>
-#include "BinarySearchTree.h"
+#include "BinarySearchTree.cpp"
 using namespace std;
 
 int main()
 {
-	BST t;
+	BST<int> t;
 
 	t.AddNode(50);
 	t.AddNode(40);
@@ -35,6 +35,12 @@ int main()
 
 	cout << "\n";
 	t.reverseLevelOrder();
+
+	BST<std::string> str;
+
+	str.AddNode("test");
+	str.AddNode("code");
+	str.PrintInOrder();
 
 	return 0;
 }

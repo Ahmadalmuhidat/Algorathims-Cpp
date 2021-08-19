@@ -1,9 +1,9 @@
 #include <iostream>
-#include "SingleLinkedOrderedList.h"std::
+#include "SingleLinkedOrderedList.cpp"
 
 int main()
 {
-	SingleLinkedList A;
+	SingleLinkedList<int> A;
 	std::cout << "list A created " << std::endl;
 	A.InsertItem(1);
 	A.InsertItem(4);
@@ -19,7 +19,7 @@ int main()
 	A.UpdateNode(1, 6);
 	A.ShowList();
 
-	SingleLinkedList B;
+	SingleLinkedList<int> B;
 	std::cout << "list B created " << std::endl;
 	B.InsertItem(3);
 	B.InsertItem(12);
@@ -36,7 +36,7 @@ int main()
 	std::cout << "=====================" << std::endl;
 	std::cout << std::endl;
 
-	SingleLinkedList C;
+	SingleLinkedList<int> C;
 	std::cout << "list C created " << std::endl;
 	std::cout << "Common items between A and B :" << std::endl;
 	;
@@ -48,7 +48,7 @@ int main()
 	MoveItem(8, A, B);
 	std::cout << std::endl;
 
-	SingleLinkedList D;
+	SingleLinkedList<int> D;
 	std::cout << "merged list" << std::endl;
 	D = MergeLists(&A, &B);
 	D.ShowList();
@@ -57,6 +57,19 @@ int main()
 	std::cout << "delete commnon" << std::endl;
 	DeleteCommon(A, B);
 	B.ShowList();
+
+	SingleLinkedList<std::string> F;
+	std::cout << "string list" << std::endl;
+	F.InsertItem("hello");
+	F.InsertItem("there");
+	F.InsertItem("fuck");
+	F.InsertItem("israel");
+	std::cout << "list F : ";
+	F.ShowList();
+	F.DeleteItem("hello");
+	F.ShowList();
+	F.UpdateNode("there", "you");
+	F.ShowList();
 
 	return 0;
 }

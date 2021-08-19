@@ -1,30 +1,34 @@
 #include <iostream>
 #include "SingleLinkedOrderedList.h"
 
-SingleLinkedList::SingleLinkedList(Node *n)
+template <typename T>
+SingleLinkedList<T>::SingleLinkedList(Node<T> *n)
 {
 	head = n;
 };
 
-SingleLinkedList::Node *SingleLinkedList::FindeItem(int d)
+template <typename T>
+Node<T> *SingleLinkedList<T>::FindeItem(T d)
 {
-	Node *temp = NULL;
-	Node *ptr = head;
+	Node<T> *temp = NULL;
+	Node<T> *ptr = head;
 	while (ptr != NULL)
 	{
 		if (ptr->data == d)
 		{
 			temp = ptr;
+			break;
 		}
 		ptr = ptr->next;
 	}
 	return temp;
 };
 
-void SingleLinkedList::sortList()
+template <typename T>
+void SingleLinkedList<T>::sortList()
 {
-	Node *current = head, *index = NULL;
-	int temp;
+	Node<T> *current = head, *index = NULL;
+	T temp;
 
 	if (head == NULL)
 	{
@@ -53,7 +57,8 @@ void SingleLinkedList::sortList()
 	}
 }
 
-void SingleLinkedList::InsertItem(int n)
+template <typename T>
+void SingleLinkedList<T>::InsertItem(T n)
 {
 	if (FindeItem(n) != NULL)
 	{
@@ -61,7 +66,7 @@ void SingleLinkedList::InsertItem(int n)
 	}
 	else
 	{
-		Node *new_node = new Node(n);
+		Node<T> *new_node = new Node<T>(n);
 
 		if (head == NULL)
 		{
@@ -69,7 +74,7 @@ void SingleLinkedList::InsertItem(int n)
 		}
 		else
 		{
-			Node *ptr = head;
+			Node<T> *ptr = head;
 			while (ptr->next != NULL)
 			{
 				ptr = ptr->next;
@@ -80,7 +85,8 @@ void SingleLinkedList::InsertItem(int n)
 	}
 };
 
-void SingleLinkedList::DeleteItem(int n)
+template <typename T>
+void SingleLinkedList<T>::DeleteItem(T n)
 {
 	if (head == NULL)
 	{
@@ -94,15 +100,16 @@ void SingleLinkedList::DeleteItem(int n)
 		}
 		else
 		{
-			Node *temp = NULL;
-			Node *CurrentNode = head->next;
-			Node *PrevNode = head;
+			Node<T> *temp = NULL;
+			Node<T> *CurrentNode = head->next;
+			Node<T> *PrevNode = head;
 			while (CurrentNode != NULL)
 			{
 				if (CurrentNode->data == n)
 				{
 					temp = CurrentNode;
 					CurrentNode = NULL;
+					break;
 				}
 				else
 				{
@@ -122,13 +129,14 @@ void SingleLinkedList::DeleteItem(int n)
 	}
 }
 
-void SingleLinkedList::UpdateNode(int k, int d)
+template <typename T>
+void SingleLinkedList<T>::UpdateNode(T oldVal, T newVal)
 {
-	Node *ptr = FindeItem(k);
+	Node<T> *ptr = FindeItem(oldVal);
 	if (ptr != NULL)
 	{
-		int before = ptr->data;
-		ptr->data = d;
+		T before = ptr->data;
+		ptr->data = newVal;
 		sortList();
 	}
 	else
@@ -137,9 +145,10 @@ void SingleLinkedList::UpdateNode(int k, int d)
 	}
 }
 
-void SingleLinkedList::ShowList()
+template <typename T>
+void SingleLinkedList<T>::ShowList()
 {
-	Node *ptr = head;
+	Node<T> *ptr = head;
 	while (ptr != NULL)
 	{
 		std::cout << ptr->data << " ";
@@ -148,11 +157,21 @@ void SingleLinkedList::ShowList()
 	std::cout << std::endl;
 }
 
-SingleLinkedList::~SingleLinkedList()
+template <typename T>
+SingleLinkedList<T>::~SingleLinkedList()
 {
+	Node<T> *next_ = head;
+	Node<T> *current_ = nullptr;
+	while (next_ != nullptr)
+	{
+		current_ = next_;
+		next_ = next_->next;
+		delete current_;
+	}
 }
 
-void MoveItem(int n, SingleLinkedList from, SingleLinkedList to)
+template <typename T>
+void MoveItem(T n, SingleLinkedList<T> from, SingleLinkedList<T> to)
 {
 	if (from.FindeItem(n))
 	{
@@ -167,9 +186,10 @@ void MoveItem(int n, SingleLinkedList from, SingleLinkedList to)
 	}
 }
 
-void DeleteCommon(SingleLinkedList &first, SingleLinkedList &second)
+template <typename T>
+void DeleteCommon(SingleLinkedList<T> &first, SingleLinkedList<T> &second)
 {
-	SingleLinkedList::Node *current = first.head;
+	Node<T> *current = first.head;
 
 	while (current != nullptr)
 	{
@@ -181,10 +201,11 @@ void DeleteCommon(SingleLinkedList &first, SingleLinkedList &second)
 	}
 }
 
-SingleLinkedList CommonItems(SingleLinkedList *first, SingleLinkedList *second)
+template <typename T>
+SingleLinkedList<T> CommonItems(SingleLinkedList<T> *first, SingleLinkedList<T> *second)
 {
-	SingleLinkedList merged_list;
-	SingleLinkedList::Node *current = second->head;
+	SingleLinkedList<T> merged_list;
+	Node<T> *current = second->head;
 
 	while (current != nullptr)
 	{
@@ -197,17 +218,18 @@ SingleLinkedList CommonItems(SingleLinkedList *first, SingleLinkedList *second)
 	return merged_list;
 }
 
-SingleLinkedList MergeLists(SingleLinkedList *first, SingleLinkedList *second)
+template <typename T>
+SingleLinkedList<T> MergeLists(SingleLinkedList<T> *first, SingleLinkedList<T> *second)
 {
-	SingleLinkedList::Node *current = second->head;
-	SingleLinkedList merged;
+	Node<T> *current = second->head;
+	SingleLinkedList<T> merged;
 	while (current != nullptr)
 	{
 		merged.InsertItem(current->data);
 		current = current->next;
 	}
 
-	SingleLinkedList::Node *current2 = first->head;
+	Node<T> *current2 = first->head;
 	while (current != nullptr)
 	{
 		merged.InsertItem(current2->data);

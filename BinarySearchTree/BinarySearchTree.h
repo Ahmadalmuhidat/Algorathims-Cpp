@@ -2,32 +2,34 @@
 #define __BINARY_SEARCH_TREE
 #include <vector>
 
+template <typename T>
+struct Node
+{
+	T data;
+	Node<T> *left;
+	Node<T> *right;
+};
+
+template <typename T>
 class BST
 {
-
 private:
-	struct Node
-	{
-		int data;
-		Node *left;
-		Node *right;
-	};
-	Node *rootptr;
+	Node<T> *rootptr;
 	static int Count;
 
-	virtual void PrintInOrderPrivet(Node *ptr);
+	void PrintInOrderPrivet(Node<T> *ptr);
 
-	virtual void AddNodePrivet(int val, Node *ptr);
+	void AddNodePrivet(T val, Node<T> *ptr);
 
-	virtual Node *searchPrivet(Node *ptr, int key);
+	Node<T> *searchPrivet(Node<T> *ptr, T data);
 
-	virtual int FindSmallestPrivet(Node *ptr);
+	int FindSmallestPrivet(Node<T> *ptr);
 
-	virtual void RemoveNodePrivet(int val, Node *ptr);
+	void RemoveNodePrivet(T val, Node<T> *ptr);
 
-	virtual void printLevelOrder(struct Node *root);
+	void printLevelOrder(struct Node<T> *root);
 
-	virtual void printGivenLevel(struct Node *root, int level);
+	void printGivenLevel(struct Node<T> *root, int level);
 
 public:
 	// main methods
@@ -35,29 +37,29 @@ public:
 
 	bool isEmpty();
 
-	Node *CreateNode(int val);
+	Node<T> *CreateNode(T val);
 
-	void AddNode(int val);
+	void AddNode(T val);
 
 	void PrintInOrder();
 
-	bool checkptr(Node *ptr);
+	bool checkptr(Node<T> *ptr);
 
-	void NodeInfo(int val);
+	void NodeInfo(T val);
 
-	Node *Search(int val);
+	Node<T> *Search(T val);
 
 	int count();
 
 	//Remove methods
-	void RemoveNode(int val);
+	void RemoveNode(T val);
 
-	void RemoveMatch(Node *parent, Node *match, bool left);
+	void RemoveMatch(Node<T> *parent, Node<T> *match, bool left);
 
 	void RemoveRootMatch();
 
 	// Printing methods
-	int height(Node *root);
+	int height(Node<T> *root);
 
 	void reverseLevelOrder();
 

@@ -1,22 +1,23 @@
 #ifndef __Queue
 #define __Queue
 
+template <typename T>
 class Queue
 {
 
 public:
 	int front; // front item
 	int tail;	 // last item
-	int arr[5];
+	T arr[5];
 
 	// "default" constructor - create an empty list
 	Queue();
 
 	// Insert new item
-	void Enqueue(int val);
+	void Enqueue(T val);
 
 	// Remove last item
-	int Dequeue();
+	T Dequeue();
 
 	// Check if the list is full or not
 	bool isFull();
@@ -35,6 +36,7 @@ public:
 };
 
 // Compare two lists
-bool CompareTwoLists(Queue F, Queue S);
+template <typename T>
+bool CompareTwoLists(Queue<T> F, Queue<T> S);
 
 #endif

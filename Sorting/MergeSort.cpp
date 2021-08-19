@@ -7,7 +7,6 @@ void printArray(int A[], int size)
     {
         cout << A[i] << " ";
     }
-        
 }
 
 void Merge(int arr[], int l, int m, int r)
@@ -17,7 +16,7 @@ void Merge(int arr[], int l, int m, int r)
 
     // Create temp arrays
     int *L = new int[n1];
-    int *R = new int [n2];
+    int *R = new int[n2];
 
     // Copy data to temp arrays L[] and R[]
     for (int i = 0; i < n1; i++)
@@ -36,13 +35,15 @@ void Merge(int arr[], int l, int m, int r)
     // Initial index of merged subarray
     int k = l;
 
-    while (i < n1 && j < n2) 
+    while (i < n1 && j < n2)
     {
-        if (L[i] <= R[j]) {
+        if (L[i] <= R[j])
+        {
             arr[k] = L[i];
             i++;
         }
-        else {
+        else
+        {
             arr[k] = R[j];
             j++;
         }
@@ -51,7 +52,7 @@ void Merge(int arr[], int l, int m, int r)
 
     // Copy the remaining elements of
     // L[], if there are any
-    while (i < n1) 
+    while (i < n1)
     {
         arr[k] = L[i];
         i++;
@@ -60,7 +61,7 @@ void Merge(int arr[], int l, int m, int r)
 
     // Copy the remaining elements of
     // R[], if there are any
-    while (j < n2) 
+    while (j < n2)
     {
         arr[k] = R[j];
         j++;
@@ -70,15 +71,15 @@ void Merge(int arr[], int l, int m, int r)
 
 void MergeSort(int arr[], int l, int r)
 {
-	if (l < r)
-	{
-		int m = (l+r) / 2;
-	    MergeSort(arr, l, m); // left array
-	    MergeSort(arr, m + 1, r); // right array
-		Merge(arr, l, m, r);
-	}
-	else
-	{
-		return;
-	}
+    if (l < r)
+    {
+        int m = (l + r) / 2;
+        MergeSort(arr, l, m);     // left array
+        MergeSort(arr, m + 1, r); // right array
+        Merge(arr, l, m, r);
+    }
+    else
+    {
+        return;
+    }
 }

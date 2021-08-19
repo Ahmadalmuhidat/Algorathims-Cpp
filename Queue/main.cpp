@@ -1,56 +1,60 @@
 #include <iostream>
-#include "queue.h"
-using namespace std;
+#include "queue.cpp"
 
 int main()
 {
-	Queue q1;
+	Queue<int> q1;
 	q1.Enqueue(3);
 	q1.Enqueue(1);
 	q1.Enqueue(13);
 	q1.Enqueue(56);
 	q1.Enqueue(20);
-	cout << (q1.isFull() ? "Queue Overflow" : "Queue Underflow") << endl;
-	cout << q1.Count() << " elements in the queue" << endl;
-	cout << "q1: ";
+	std::cout << (q1.isFull() ? "Queue Overflow" : "Queue Underflow") << std::endl;
+	std::cout << q1.Count() << " elements in the queue" << std::endl;
+	std::cout << "q1: ";
 	q1.Display();
 	q1.Dequeue();
-	cout << "q1: ";
+	std::cout << "q1: ";
 	q1.Display();
-	cout << q1.Count() << " elements in the queue" << endl;
+	std::cout << q1.Count() << " elements in the queue" << std::endl;
 
-	cout << "----------------------" << endl;
+	std::cout << "----------------------" << std::endl;
 
-	Queue q2;
+	Queue<int> q2;
 	q2.Enqueue(20);
 	q2.Enqueue(56);
 	q2.Enqueue(1);
 	q2.Enqueue(13);
 	q2.Enqueue(3);
-	cout << "q2: ";
+	std::cout << "q2: ";
 	q2.Display();
 
-	Queue q3;
+	Queue<int> q3;
 	q3.Enqueue(9);
 	q3.Enqueue(4);
 	q3.Enqueue(15);
 	q3.Enqueue(28);
 	q3.Enqueue(7);
-	cout << "q3: ";
+	std::cout << "q3: ";
 	q3.Display();
-	cout << (CompareTwoLists(q2, q3) ? "q2 & q3 same" : "q2 & q3 not same") << endl;
+	std::cout << (CompareTwoLists(q2, q3) ? "q2 & q3 same" : "q2 & q3 not same") << std::endl;
 
-	Queue q4;
+	Queue<int> q4;
 	q4.Enqueue(9);
 	q4.Enqueue(4);
 	q4.Enqueue(15);
 	q4.Enqueue(28);
 	q4.Enqueue(7);
-	cout << (CompareTwoLists(q4, q3) ? "q4 & q3 same" : "q4 & q3 not same") << endl;
+	std::cout << (CompareTwoLists(q4, q3) ? "q4 & q3 same" : "q4 & q3 not same") << std::endl;
 
-	cout << "\nsorting: \n";
+	std::cout << "\nsorting: \n";
 	q4.Sorting();
 	q4.Display();
+
+	Queue<std::string> q5;
+	q5.Enqueue("test");
+	q5.Enqueue("queue");
+	q5.Display();
 
 	return 0;
 }

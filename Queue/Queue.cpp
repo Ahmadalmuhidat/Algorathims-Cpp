@@ -2,19 +2,20 @@
 #include <algorithm>
 #include "queue.h"
 
-using namespace std;
 
-Queue::Queue()
+template <typename T>
+Queue<T>::Queue()
 {
 	front = -1;
 	tail = -1;
-	for (int i = 0; i < 5; i++)
-	{
-		arr[i] = 0;
-	}
+	// for (int i = 0; i < 5; i++)
+	// {
+	// 	arr[i] = 0;
+	// }
 }
 
-void Queue::Enqueue(int val)
+template <typename T>
+void Queue<T>::Enqueue(T val)
 {
 	if (isFull())
 	{
@@ -33,9 +34,10 @@ void Queue::Enqueue(int val)
 	}
 }
 
-int Queue::Dequeue()
+template <typename T>
+T Queue<T>::Dequeue()
 {
-	int x;
+	T x;
 	if (isEmpty())
 	{
 		return 0;
@@ -58,7 +60,8 @@ int Queue::Dequeue()
 	return x;
 }
 
-bool Queue::isFull()
+template <typename T>
+bool Queue<T>::isFull()
 {
 	if (tail == 4)
 	{
@@ -70,7 +73,8 @@ bool Queue::isFull()
 	}
 }
 
-bool Queue::isEmpty()
+template <typename T>
+bool Queue<T>::isEmpty()
 {
 	if (front == -1 && tail == -1)
 	{
@@ -82,7 +86,8 @@ bool Queue::isEmpty()
 	}
 }
 
-void Queue::Sorting()
+template <typename T>
+void Queue<T>::Sorting()
 {
 	if (isEmpty())
 	{
@@ -90,25 +95,28 @@ void Queue::Sorting()
 	}
 	else
 	{
-		sort(begin(arr), end(arr));
+		std::sort(std::begin(arr), std::end(arr));
 	}
 }
 
-int Queue::Count()
+template <typename T>
+int Queue<T>::Count()
 {
 	return (tail - front + 1);
 }
 
-void Queue::Display()
+template <typename T>
+void Queue<T>::Display()
 {
 	for (int i = 0; i < 5; i++)
 	{
-		cout << arr[i] << " ";
+		std::cout << arr[i] << " ";
 	}
-	cout << "\n";
+	std::cout << "\n";
 }
 
-bool CompareTwoLists(Queue F, Queue S)
+template <typename T>
+bool CompareTwoLists(Queue<T> F, Queue<T> S)
 {
 	if (F.Count() == S.Count())
 	{

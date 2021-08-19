@@ -1,33 +1,34 @@
 #include <iostream>
 #include <vector>
 #include "BinarySearchTree.h"
-using namespace std;
 
 // Privet
-void BST::PrintInOrderPrivet(Node *ptr)
+template <typename T>
+void BST<T>::PrintInOrderPrivet(Node<T> *ptr)
 {
 	if (isEmpty())
 	{
-		cout << "nothing to print" << endl;
+		std::cout << "nothing to print" << std::endl;
 	}
 	if (ptr->left != nullptr)
 	{
 		PrintInOrderPrivet(ptr->left);
 	}
-	cout << ptr->data << " ";
+	std::cout << ptr->data << " ";
 	if (ptr->right != nullptr)
 	{
 		PrintInOrderPrivet(ptr->right);
 	}
 }
 
-void BST::AddNodePrivet(int val, Node *ptr)
+template <typename T>
+void BST<T>::AddNodePrivet(T val, Node<T> *ptr)
 {
 	if (isEmpty())
 	{
 		rootptr = CreateNode(val);
 		Count++;
-		//cout << val << " top" << endl;
+		//std::cout << val << " top" << std::endl;
 	}
 	else if (val < ptr->data) // left insert
 	{
@@ -35,7 +36,7 @@ void BST::AddNodePrivet(int val, Node *ptr)
 		{
 			ptr->left = CreateNode(val);
 			Count++;
-			// << val << " left" << endl;
+			// << val << " left" << std::endl;
 		}
 		else
 		{
@@ -48,7 +49,7 @@ void BST::AddNodePrivet(int val, Node *ptr)
 		{
 			ptr->right = CreateNode(val);
 			Count++;
-			//cout << val << " right" << endl;
+			//std::cout << val << " right" << std::endl;
 		}
 		else
 		{
@@ -57,18 +58,19 @@ void BST::AddNodePrivet(int val, Node *ptr)
 	}
 	else
 	{
-		cout << val << " has been already inserted to the tree" << endl;
+		std::cout << val << " has been already inserted to the tree" << std::endl;
 	}
 }
 
-BST::Node *BST::searchPrivet(Node *ptr, int key)
+template <typename T>
+Node<T> *BST<T>::searchPrivet(Node<T> *ptr, T key)
 {
 	if (ptr != NULL)
 	{
 		// Base Cases: root is null or key is present at root
 		if (ptr->data == key)
 		{
-			cout << key << " found" << endl;
+			std::cout << key << " found" << std::endl;
 			return ptr;
 		}
 		// Key is greater than root's key
@@ -85,7 +87,8 @@ BST::Node *BST::searchPrivet(Node *ptr, int key)
 	}
 }
 
-int BST::FindSmallestPrivet(Node *ptr)
+template <typename T>
+int BST<T>::FindSmallestPrivet(Node<T> *ptr)
 {
 	if (isEmpty())
 	{
@@ -104,7 +107,8 @@ int BST::FindSmallestPrivet(Node *ptr)
 	}
 }
 
-void BST::RemoveNodePrivet(int val, Node *ptr)
+template <typename T>
+void BST<T>::RemoveNodePrivet(T val, Node<T> *ptr)
 {
 	if (!isEmpty())
 	{
@@ -130,26 +134,28 @@ void BST::RemoveNodePrivet(int val, Node *ptr)
 				}
 				else
 				{
-					cout << "The val" << val << " were not found" << endl;
+					std::cout << "The val" << val << " were not found" << std::endl;
 				}
 			}
 		}
 	}
 	else
 	{
-		cout << "tree is empty" << endl;
+		std::cout << "tree is empty" << std::endl;
 	}
 }
 
 // Public
 
 // main methods
-BST::BST()
+template <typename T>
+BST<T>::BST()
 {
 	rootptr = nullptr;
 }
 
-bool BST::isEmpty()
+template <typename T>
+bool BST<T>::isEmpty()
 {
 	if (rootptr == nullptr)
 	{
@@ -161,26 +167,30 @@ bool BST::isEmpty()
 	}
 }
 
-BST::Node *BST::CreateNode(int val)
+template <typename T>
+Node<T> *BST<T>::CreateNode(T val)
 {
-	Node *NewNode = new Node;
+	Node<T> *NewNode = new Node<T>;
 	NewNode->data = val;
 	NewNode->left = nullptr;
 	NewNode->right = nullptr;
 	return NewNode;
 }
 
-void BST::AddNode(int val)
+template <typename T>
+void BST<T>::AddNode(T val)
 {
 	AddNodePrivet(val, rootptr);
 }
 
-void BST::PrintInOrder()
+template <typename T>
+void BST<T>::PrintInOrder()
 {
 	PrintInOrderPrivet(rootptr);
 }
 
-bool BST::checkptr(Node *ptr)
+template <typename T>
+bool BST<T>::checkptr(Node<T> *ptr)
 {
 	if (ptr != nullptr)
 	{
@@ -192,42 +202,47 @@ bool BST::checkptr(Node *ptr)
 	}
 }
 
-void BST::NodeInfo(int val)
+template <typename T>
+void BST<T>::NodeInfo(T val)
 {
-	Node *ptr = Search(val);
+	Node<T> *ptr = Search(val);
 	if (ptr == NULL)
 	{
-		cout << " not in tree" << endl;
+		std::cout << " not in tree" << std::endl;
 	}
 	else
 	{
-		cout << "    " << ptr->data << endl;
+		std::cout << "    " << ptr->data << std::endl;
 
-		cout << (checkptr(ptr->left) ? ptr->left->data : NULL) << "      " << (checkptr(ptr->right) ? ptr->right->data : NULL) << endl;
+		std::cout << (checkptr(ptr->left) ? ptr->left->data : 0) << "      " << (checkptr(ptr->right) ? ptr->right->data : 0) << std::endl;
 	}
 }
 
-BST::Node *BST::Search(int val)
+template <typename T>
+Node<T> *BST<T>::Search(T val)
 {
 	return searchPrivet(rootptr, val);
 }
 
-int BST::count()
+template <typename T>
+int BST<T>::count()
 {
 	return Count;
 }
 
 // Remove method
-void BST::RemoveNode(int val)
+template <typename T>
+void BST<T>::RemoveNode(T val)
 {
 	RemoveNodePrivet(val, rootptr);
 }
 
-void BST::RemoveMatch(Node *parent, Node *match, bool left)
+template <typename T>
+void BST<T>::RemoveMatch(Node<T> *parent, Node<T> *match, bool left)
 {
 	if (!isEmpty())
 	{
-		Node *delptr;
+		Node<T> *delptr;
 		int MatchKey = match->data;
 		int SmallestIntRightSubTree;
 
@@ -237,7 +252,7 @@ void BST::RemoveMatch(Node *parent, Node *match, bool left)
 			left == true ? parent->left = nullptr : parent->right = nullptr;
 			delete delptr;
 			Count--;
-			cout << MatchKey << " removed" << endl;
+			std::cout << MatchKey << " removed" << std::endl;
 		}
 		else if (match->left == nullptr && match->right != nullptr)
 		{
@@ -246,7 +261,7 @@ void BST::RemoveMatch(Node *parent, Node *match, bool left)
 			delptr = match;
 			delete delptr;
 			Count--;
-			cout << MatchKey << " removed" << endl;
+			std::cout << MatchKey << " removed" << std::endl;
 		}
 		else if (match->left != nullptr && match->right == nullptr)
 		{
@@ -255,7 +270,7 @@ void BST::RemoveMatch(Node *parent, Node *match, bool left)
 			delptr = match;
 			delete delptr;
 			Count--;
-			cout << MatchKey << " removed" << endl;
+			std::cout << MatchKey << " removed" << std::endl;
 		}
 		else
 		{
@@ -266,16 +281,17 @@ void BST::RemoveMatch(Node *parent, Node *match, bool left)
 	}
 	else
 	{
-		cout << "tree empty" << endl;
+		std::cout << "tree empty" << std::endl;
 	}
 }
 
-void BST::RemoveRootMatch()
+template <typename T>
+void BST<T>::RemoveRootMatch()
 {
 	if (rootptr != nullptr)
 	{
-		Node *delptr = rootptr;
-		int RootKey = rootptr->data;
+		Node<T> *delptr = rootptr;
+		T RootKey = rootptr->data;
 		int SmallestIntRightSubTree;
 
 		if (rootptr->left == nullptr && rootptr->right == nullptr)
@@ -283,7 +299,7 @@ void BST::RemoveRootMatch()
 			rootptr = nullptr;
 			delete delptr;
 			Count--;
-			cout << RootKey << " removed" << endl;
+			std::cout << RootKey << " removed" << std::endl;
 		}
 		else if (rootptr->left == nullptr && rootptr->right != nullptr)
 		{
@@ -291,7 +307,7 @@ void BST::RemoveRootMatch()
 			delptr->right = nullptr;
 			delete delptr;
 			Count--;
-			cout << RootKey << " deleted" << endl;
+			std::cout << RootKey << " deleted" << std::endl;
 		}
 		else if (rootptr->left != nullptr && rootptr->right == nullptr)
 		{
@@ -299,7 +315,7 @@ void BST::RemoveRootMatch()
 			delptr->left = nullptr;
 			delete delptr;
 			Count--;
-			cout << RootKey << " deleted" << endl;
+			std::cout << RootKey << " deleted" << std::endl;
 		}
 		else
 		{
@@ -310,12 +326,13 @@ void BST::RemoveRootMatch()
 	}
 	else
 	{
-		cout << "tree is empty" << endl;
+		std::cout << "tree is empty" << std::endl;
 	}
 }
 
 // Printing methods
-int BST::height(Node *root)
+template <typename T>
+int BST<T>::height(Node<T> *root)
 {
 	if (root == NULL)
 	{
@@ -326,12 +343,13 @@ int BST::height(Node *root)
 		int left_height = height(root->left);
 		int right_height = height(root->right);
 
-		// Find max(subtree_height) + 1 to get the height of the tree
-		return max(left_height, right_height) + 1;
+		// Find max(subtree_heightH) + 1 to get the height of the tree
+		return std::max(left_height, right_height) + 1;
 	}
 }
 
-void BST::printLevelOrder(struct Node *root)
+template <typename T>
+void BST<T>::printLevelOrder(struct Node<T> *root)
 {
 	/* Function to line by line print level order traversal a tree*/
 	int h = height(root);
@@ -343,7 +361,8 @@ void BST::printLevelOrder(struct Node *root)
 	}
 }
 
-void BST::reverseLevelOrder()
+template <typename T>
+void BST<T>::reverseLevelOrder()
 {
 	/*Function to print REVERSE level order traversal a tree*/
 
@@ -356,7 +375,8 @@ void BST::reverseLevelOrder()
 	}
 }
 
-void BST::printGivenLevel(struct Node *root, int level)
+template <typename T>
+void BST<T>::printGivenLevel(struct Node<T> *root, int level)
 {
 	/*Print nodes at a given level*/
 
@@ -377,10 +397,12 @@ void BST::printGivenLevel(struct Node *root, int level)
 	}
 }
 
-void BST::PrintAsTree()
+template <typename T>
+void BST<T>::PrintAsTree()
 {
 	printLevelOrder(rootptr);
 }
 
 // statics
-int BST::Count = 0;
+template <typename T>
+int BST<T>::Count = 0;

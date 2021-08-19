@@ -7,12 +7,12 @@
 // DoubleLinkedList :: DoubleLinkedList (): count_ (0), head_ (nullptr), tail_ (nullptr) {}
 
 // Constructor "copy" - create a copy of the existing list
-DoubleLinkedList::DoubleLinkedList(const DoubleLinkedList& src) :
-	head_(nullptr),
-	tail_(nullptr),
-	count_(0)
+template <typename T>
+DoubleLinkedList<T>::DoubleLinkedList(const DoubleLinkedList<T> &src) : head_(nullptr),
+																																				tail_(nullptr),
+																																				count_(0)
 {
-	Node* currentNode = src.head_;
+	Node<T> *currentNode = src.head_;
 	while (currentNode != nullptr)
 	{
 		this->insertTail(currentNode->item_);
@@ -21,10 +21,12 @@ DoubleLinkedList::DoubleLinkedList(const DoubleLinkedList& src) :
 }
 
 // Insert the generated node into the tail of the list
-void DoubleLinkedList::insertTail(Node* x)
+template <typename T>
+void DoubleLinkedList<T>::insertTail(Node<T> *x)
 {
 	x->prev_ = tail_;
-	if (head_ != nullptr) {
+	if (head_ != nullptr)
+	{
 		tail_->next_ = x;
 	}
 	else
@@ -36,26 +38,31 @@ void DoubleLinkedList::insertTail(Node* x)
 }
 
 // Insert the generated node at the beginning of the list
-void DoubleLinkedList::insertHead(Node* x)
-{   // x->prev_ == nullptr,  x->next_ == nullptr  
+template <typename T>
+void DoubleLinkedList<T>::insertHead(Node<T> *x)
+{ // x->prev_ == nullptr,  x->next_ == nullptr
 	x->next_ = head_;
-	if (head_ != nullptr) {
+	if (head_ != nullptr)
+	{
 		// the list was NOT empty - the new item will be both the first and the last
 		head_->prev_ = x;
 	}
-	else {
+	else
+	{
 		// the list was empty - the new item will be both the first and the last
 		tail_ = x;
 	}
 	head_ = x;
-	count_++;  // the number of list items has increased
+	count_++; // the number of list items has increased
 }
 
 // Delete the given node
-void DoubleLinkedList::deleteNode(Node* x)
+template <typename T>
+void DoubleLinkedList<T>::deleteNode(Node<T> *x)
 {
-	if (x == nullptr) {
-		throw ("DoubleLinkedList::deleteNode  - the address of the deleted node is set incorrectly");
+	if (x == nullptr)
+	{
+		throw("DoubleLinkedList::deleteNode  - the address of the deleted node is set incorrectly");
 	}
 	if (x->prev_ != nullptr)
 	{
@@ -67,109 +74,129 @@ void DoubleLinkedList::deleteNode(Node* x)
 		// the head of the list is removed, the second item becomes the first
 		head_ = x->next_;
 	}
-	if (x->next_ != nullptr) {
+	if (x->next_ != nullptr)
+	{
 		// NOT the tail is removed
 		(x->next_)->prev_ = x->prev_;
 	}
-	else {
+	else
+	{
 		// remove the tail
 		tail_ = x->prev_;
 	}
-	delete x;      // 
-	count_--;     // the number of list items has decreased
+	delete x; //
+	count_--; // the number of list items has decreased
 }
 
-// Search for a node (address) with a given value 
-DoubleLinkedList::Node* DoubleLinkedList::searchNode(int item)
+// Search for a node (address) with a given value
+template <typename T>
+Node<T> *DoubleLinkedList<T>::searchNode(T item)
 {
-	Node* x = head_;
-	while (x != nullptr && x->item_ != item) {
+	Node<T> *x = head_;
+	while (x != nullptr && x->item_ != item)
+	{
 		x = x->next_;
 	}
 	return x;
 }
 
-// Replace node information with a new one 
-DoubleLinkedList::Node* DoubleLinkedList::replaceNode(DoubleLinkedList::Node* x, int item)
+// Replace node information with a new one
+template <typename T>
+Node<T> *DoubleLinkedList<T>::replaceNode(Node<T> *x, T item)
 {
 	x->item_ = item;
 	return x;
 }
 
 // number of list items
-int DoubleLinkedList::count()const { return count_; }
+template <typename T>
+int DoubleLinkedList<T>::count() const { return count_; }
 
 // Access information of the head node of the list
-int DoubleLinkedList::headItem() const
+template <typename T>
+T DoubleLinkedList<T>::headItem() const
 {
-	if (head_ != nullptr) {
+	if (head_ != nullptr)
+	{
 		return head_->item_;
 	}
-	throw ("headItem - the list is empty!");
+	throw("headItem - the list is empty!");
 }
-
-int& DoubleLinkedList::headItem()
+template <typename T>
+T &DoubleLinkedList<T>::headItem()
 {
-	if (head_ != nullptr) {
+	if (head_ != nullptr)
+	{
 		return head_->item_;
 	}
-	throw ("headItem - the list is empty!");
+	throw("headItem - the list is empty!");
 }
 
 // Access information of the tail node of the list
-int DoubleLinkedList::tailItem() const
+template <typename T>
+T DoubleLinkedList<T>::tailItem() const
 {
-	if (tail_ != nullptr) {
+	if (tail_ != nullptr)
+	{
 		return tail_->item_;
 	}
-	throw ("tailItem - the list is empty!");
+	throw("tailItem - the list is empty!");
 }
-int& DoubleLinkedList::tailItem()
+
+template <typename T>
+T &DoubleLinkedList<T>::tailItem()
 {
-	if (tail_ != nullptr) {
+	if (tail_ != nullptr)
+	{
 		return tail_->item_;
 	}
-	throw ("tailItem - the list is empty!");
+	throw("tailItem - the list is empty!");
 }
 
 // Insert an item into the head of the list
-void DoubleLinkedList::insertHead(int item)
-{   // create a new list item and add to the head
-	insertHead(new Node(item));
+template <typename T>
+void DoubleLinkedList<T>::insertHead(T item)
+{ // create a new list item and add to the head
+	insertHead(new Node<T>(item));
 }
 
-
 // Insert an item into the tail of the list
-void DoubleLinkedList::insertTail(int item)
-{   // create a new list item and add to the tail 
-	insertTail(new Node(item));
+template <typename T>
+void DoubleLinkedList<T>::insertTail(T item)
+{ // create a new list item and add to the tail
+	insertTail(new Node<T>(item));
 }
 
 // Remove an item from the head of the list
-bool DoubleLinkedList::deleteHead()
+template <typename T>
+bool DoubleLinkedList<T>::deleteHead()
 {
-	if (head_ == nullptr) {
-		return 0;  // list is empty, no deletions
+	if (head_ == nullptr)
+	{
+		return 0; // list is empty, no deletions
 	}
 	deleteNode(head_);
-	return 1;     // the list was NOT empty, removing the head
+	return 1; // the list was NOT empty, removing the head
 }
 
 // Remove item from the tail of the list
-bool DoubleLinkedList::deleteTail()
+template <typename T>
+bool DoubleLinkedList<T>::deleteTail()
 {
-	if (tail_ == nullptr) {
+	if (tail_ == nullptr)
+	{
 		return false;
 	}
 	deleteNode(tail_);
 	return 1;
 }
 
-// Deleting a node with a given value 
-bool DoubleLinkedList::deleteItem(const int item)
+// Deleting a node with a given value
+template <typename T>
+bool DoubleLinkedList<T>::deleteItem(const int item)
 {
 	bool flag = 0;
-	Node* temp = head_;
+	Node<T> *temp = head_;
 	while (temp != nullptr)
 	{
 		if (temp->item_ == item)
@@ -186,61 +213,75 @@ bool DoubleLinkedList::deleteItem(const int item)
 	return flag;
 }
 
-// Search for a record with a given value 
-bool DoubleLinkedList::searchItem(int item)
-{   // return TRUE if the node is found
+// Search for a record with a given value
+template <typename T>
+bool DoubleLinkedList<T>::searchItem(T item)
+{ // return TRUE if the node is found
 	return (searchNode(item) != nullptr);
 }
 
-
 // Replace node information with a new one
-bool DoubleLinkedList::replaceItem(int itemOld, int itemNew)
+template <typename T>
+bool DoubleLinkedList<T>::replaceItem(T itemOld, T itemNew)
 {
-	bool isReplace = 0;
-	Node* x = head_;
-	while (x != nullptr) {
+	bool flag = 0;
+	Node<T> *x = head_;
+	while (x != nullptr)
+	{
 		if (x->item_ == itemOld)
 		{
 			x->item_ = itemNew;
-			isReplace = true;
+			flag = 1;
 		}
 		x = x->next_;
 	}
-	return isReplace;
+	return flag;
 }
 
 // Output the list items as text to standard output
-void DoubleLinkedList::outAll()
+template <typename T>
+void DoubleLinkedList<T>::outAll()
 {
-	Node* current = head_;       // Pointer to element
-	while (current != nullptr) {
+	Node<T> *current = head_; // Pointer to element
+	while (current != nullptr)
+	{
 		std::cout << current->item_ << ' ';
-		current = current->next_;  // Move to next item
+		current = current->next_; // Move to next item
 	}
 	std::cout << std::endl;
 }
 
-// List destructor	
-DoubleLinkedList::~DoubleLinkedList()
+// List destructor
+template <typename T>
+DoubleLinkedList<T>::~DoubleLinkedList()
 {
-	Node* current = nullptr;   // pointer to the element to be removed
-	Node* next = head_;        // pointer to next element
-	while (next != nullptr) {  // while there are more items in the list
+	Node<T> *current = nullptr; // pointer to the element to be removed
+	Node<T> *next = head_;			// pointer to next element
+	while (next != nullptr)
+	{ // while there are more items in the list
 		current = next;
-		next = next->next_;    // go to the next item
-		delete current;        // free memory
+		next = next->next_; // go to the next item
+		delete current;			// free memory
 	}
 }
 
 // copy assignment operator
-DoubleLinkedList& DoubleLinkedList::operator=(const DoubleLinkedList& src) {
+template <typename T>
+DoubleLinkedList<T> &DoubleLinkedList<T>::operator=(const DoubleLinkedList<T> &src)
+{
 	if (this != &src)
+	{
 		DoubleLinkedList(src).swap(*this);
+	}
+
 	return *this;
 }
+
 //swap
-void DoubleLinkedList::swap(DoubleLinkedList& src)noexcept {
-	Node* temp = nullptr;
+template <typename T>
+void DoubleLinkedList<T>::swap(DoubleLinkedList<T> &src) noexcept
+{
+	Node<T> *temp = nullptr;
 	temp = head_;
 	head_ = src.head_;
 	src.head_ = temp;
@@ -254,7 +295,9 @@ void DoubleLinkedList::swap(DoubleLinkedList& src)noexcept {
 }
 
 // move constructor
-DoubleLinkedList::DoubleLinkedList(DoubleLinkedList&& src)noexcept {
+template <typename T>
+DoubleLinkedList<T>::DoubleLinkedList(DoubleLinkedList<T> &&src) noexcept
+{
 	head_ = src.head_;
 	tail_ = src.tail_;
 	count_ = src.count_;
@@ -264,10 +307,9 @@ DoubleLinkedList::DoubleLinkedList(DoubleLinkedList&& src)noexcept {
 }
 
 // operator of assignment movement
-
-DoubleLinkedList& DoubleLinkedList::operator=(DoubleLinkedList&& x)noexcept
+template <typename T>
+DoubleLinkedList<T> &DoubleLinkedList<T>::operator=(DoubleLinkedList<T> &&x) noexcept
 {
-
 	if (&x == this)
 		return *this;
 	while (head_ != nullptr)
@@ -286,18 +328,17 @@ DoubleLinkedList& DoubleLinkedList::operator=(DoubleLinkedList&& x)noexcept
 	return *this;
 }
 
-std::ostream& operator<< (std::ostream& out, DoubleLinkedList& src) {
-	src.outAll();
-	return out;
-}
-
-bool DoubleLinkedList::operator==(const DoubleLinkedList& src) {
+template <typename T>
+bool DoubleLinkedList<T>::operator==(const DoubleLinkedList<T> &src)
+{
 	if (count_ != src.count_)
 		return false;
-	Node* left = head_;
-	Node* right = src.head_;
-	while (left != nullptr && right != nullptr) {
-		if (left->item_ == right->item_) {
+	Node<T> *left = head_;
+	Node<T> *right = src.head_;
+	while (left != nullptr && right != nullptr)
+	{
+		if (left->item_ == right->item_)
+		{
 			left = left->next_;
 			right = right->next_;
 		}
@@ -309,10 +350,14 @@ bool DoubleLinkedList::operator==(const DoubleLinkedList& src) {
 	else
 		return false;
 }
-void DoubleLinkedList::addList(DoubleLinkedList& src) {
-	Node* x = src.head_;
+
+template <typename T>
+void DoubleLinkedList<T>::addList(DoubleLinkedList<T> &src)
+{
+	Node<T> *x = src.head_;
 	if (src.head_ != nullptr)
-		while (x != nullptr) {
+		while (x != nullptr)
+		{
 			this->insertTail(x);
 			x = x->next_;
 		}
@@ -320,5 +365,4 @@ void DoubleLinkedList::addList(DoubleLinkedList& src) {
 	src.head_ = nullptr;
 	src.tail_ = nullptr;
 	src.count_ = 0;
-
 }
